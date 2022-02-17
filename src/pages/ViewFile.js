@@ -151,6 +151,7 @@ const ViewFile = () => {
             </div>
           ) : (
             <div className="viewPage">
+            <h1>{fdata.data.fileName}</h1>
              <div className="top" >
              <Link to="/">
                 <button className="btn">Create New</button>
