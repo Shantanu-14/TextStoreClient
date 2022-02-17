@@ -63,6 +63,7 @@ const ViewAll = () => {
     })
       .then((res) => {
         res.json();
+        navigate(0);
       })
       .catch((err) => {
         console.log(err);
@@ -94,7 +95,6 @@ const ViewAll = () => {
                   className="btn renew"
                   onClick={() => {
                     renewExpiry(file._id);
-                    window.location.reload();
                     toast.success("Renewed for Next 24 hours!", {
                       position: "top-right",
                       autoClose: 3000,
@@ -120,8 +120,7 @@ const ViewAll = () => {
                       pauseOnHover: true,
                       draggable: true,
                       progress: undefined,
-                    });
-                    window.location.reload();
+                    })
                   }}
                 >
                   Delete
