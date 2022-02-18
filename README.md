@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# Introduction of Link Sharer App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This website helps you to share any data as a shortened URL and you can also shorten a very long URL.
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+## Tech Stack Used
+ MERN Stack(MongoDB, Express, React, Node)
+ 
+## Deployment Link
+  The site is hosted on [https://textstore.netlify.app/](https://textstore.netlify.app/). Click on it to open it in your browser.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## How To Setup Website
+### Frontend
+ The frontend is built on React. To set it up, first clone the repository from above.
+ Then run the following scripts -
+ #### `npm i`
+ It installs all the required packages to start running your app.
+ #### `npm start`
+ This script allows you to run your app in development mode.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend
+ A backend is already hosted on Heroku which will run automatically when you clone the code.
+ To setup your own backend, follow [https://github.com/Shantanu-14/TextStoreServer](https://github.com/Shantanu-14/TextStoreServer).
+ 
+## Screenshots
 
-### `npm test`
+### Homepage
+ ![shaHomePage](https://user-images.githubusercontent.com/56495294/154623826-d568b00f-ccbe-41f0-a802-205af06cd887.jpg)
+ 
+ On this page, you can enter data, encrypt it and save it as well.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### View Data Page
 
-### `npm run build`
+ ![shaData](https://user-images.githubusercontent.com/56495294/154623849-ae111c0c-e250-44cb-95ed-1678ddfe1fee.jpg)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  Here, you can see the data and also share it by shortening the URL.
+  
+### All Files Page
+  ![shaAllFiles](https://user-images.githubusercontent.com/56495294/154623878-c4c113bb-be33-49cd-8e98-883ea5f1ca91.jpg)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  Here, you can see all the files that have been saved in the database and also renew their expiry date as well as delete them.
+  
+### Access Logs Page
+![shaAccessLogs](https://user-images.githubusercontent.com/56495294/154623902-995ae047-7800-4801-8019-dc7571947bf9.jpg)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  
+  On this page, you can see all the access logs - when and by which IP address the specific data file was accessed.
