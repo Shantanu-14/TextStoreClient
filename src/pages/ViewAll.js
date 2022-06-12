@@ -89,8 +89,10 @@ const ViewAll = () => {
               >
                 {file.name}
               </h4>
+              <p>
+                {console.log(file.createdAt)}
+              </p>
               <div>
-                {" "}
                 <button
                   className="btn renew"
                   onClick={() => {

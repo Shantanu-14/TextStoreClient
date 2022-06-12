@@ -7,8 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import axios from "axios";
-import {BACKEND_SERVER} from "..//URLConfig"
-
+import { BACKEND_SERVER } from "..//URLConfig";
 
 const EditorX = () => {
   const [text, setText] = useState("");
@@ -22,6 +21,15 @@ const EditorX = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const getNewFileName = async () => {
+      const res = await axios.get(`${BACKEND_SERVER}/getNumberOfUntitledFiles`);
+      let fileName = `Untitled ${res.data.count + 1}`;
+      setFileName(fileName);
+    };
+    getNewFileName();
+  }, []);
+
   const onOpenModal = () => {
     setOpen(true);
   };
@@ -34,10 +42,6 @@ const EditorX = () => {
     var plainString = htmlString.replace(/<[^>]+>/g, "");
     return plainString;
   };
-
-  useEffect(() => {
-    setIsURL(validURL(parseText()));
-  }, [text]);
 
   const validURL = (str) => {
     var pattern = new RegExp(
@@ -239,9 +243,8 @@ const EditorX = () => {
             </div>
           ) : (
             <div>
-                   
-                    <h3 className="modalText generating">Generating..</h3>
-                   </div>
+              <h3 className="modalText generating">Generating..</h3>
+            </div>
           )
         ) : (
           <div>
