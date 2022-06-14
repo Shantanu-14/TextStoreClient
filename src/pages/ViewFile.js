@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import {BACKEND_SERVER} from "../URLConfig"
+import { BACKEND_SERVER } from "../URLConfig";
 
 const ViewFile = () => {
   const [fdata, setFData] = useState(null);
@@ -93,23 +93,18 @@ const ViewFile = () => {
 
   const decryptData = async () => {
     try {
-      const response = await fetch(
-        "https://classify-web.herokuapp.com/api/decrypt",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-          },
-          body: JSON.stringify({
-            data: fdata.data,
-            key: decryptionKey,
-          }),
-        }
-      );
-      const res = await response.json();
-      console.log(res);
-      setRenderData(res.result);
-      setIsEncrypted(false);
+      await axios
+        .post(`${BACKEND_SERVER}/decryptData`, {
+          data: fdata.data,
+          key: decryptionKey,
+        })
+        .then((response) => {
+          setRenderData(response.data.decryptedData);
+          setIsEncrypted(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (err) {
       console.log(err);
     }
@@ -138,7 +133,9 @@ const ViewFile = () => {
         <>
           {isEncrypted ? (
             <div className="expireScreen">
-              <h1>Your data is encrypted. Please enter the key to view data.</h1>
+              <h1>
+                Your data is encrypted. Please enter the key to view data.
+              </h1>
               <input
                 type="password"
                 placeholder="Enter the key"
@@ -151,20 +148,20 @@ const ViewFile = () => {
             </div>
           ) : (
             <div className="viewPage">
-            <h1>{fdata.data.fileName}</h1>
-             <div className="top" >
-             <Link to="/">
-                <button className="btn">Create New</button>
-              </Link>
-              <Link to={"/logs/" + id}>
-                <button className="btn">Access Logs</button>
-              </Link>
-             </div>
-              <div className="textContainer" >{parse(renderData)}</div>
-              <div className="modalBtnContainer" >
-              <button className="btn" onClick={shortenURL}>
-                Short URL
-              </button>
+              <h1>{fdata.data.fileName}</h1>
+              <div className="top">
+                <Link to="/">
+                  <button className="btn">Create New</button>
+                </Link>
+                <Link to={"/logs/" + id}>
+                  <button className="btn">Access Logs</button>
+                </Link>
+              </div>
+              <div className="textContainer">{parse(renderData)}</div>
+              <div className="modalBtnContainer">
+                <button className="btn" onClick={shortenURL}>
+                  Short URL
+                </button>
               </div>
               <Modal
                 open={open}
@@ -202,9 +199,9 @@ const ViewFile = () => {
                       </div>
                     </div>
                   ) : (
-                   <div>
-                    <h3 className="modalText generating">Generating..</h3>
-                   </div>
+                    <div>
+                      <h3 className="modalText generating">Generating..</h3>
+                    </div>
                   )}
                 </p>
               </Modal>
@@ -216,9 +213,9 @@ const ViewFile = () => {
     } else {
       return (
         <div className="expireScreen">
-           <h1 className="generating" >Loading...</h1>
+          <h1 className="generating">Loading...</h1>
         </div>
-      )
+      );
     }
   }
 };

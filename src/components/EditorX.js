@@ -8,6 +8,10 @@ import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import axios from "axios";
 import { BACKEND_SERVER } from "..//URLConfig";
+import {BiSave} from 'react-icons/bi';
+import {BsLockFill} from 'react-icons/bs';
+import {BsFiles} from 'react-icons/bs';
+import "./home.css";
 
 const EditorX = () => {
   const [text, setText] = useState("");
@@ -29,6 +33,15 @@ const EditorX = () => {
     };
     getNewFileName();
   }, []);
+
+  useEffect(() => {
+    if(validURL(parseText())){
+      setIsURL(true);
+    }
+    else{
+      setIsURL(false);
+    }
+  }, [text]);
 
   const onOpenModal = () => {
     setOpen(true);
@@ -132,22 +145,12 @@ const EditorX = () => {
 
   const encryptData = async () => {
     try {
-      const response = await fetch(
-        "https://classify-web.herokuapp.com/api/encrypt",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-          },
-          body: JSON.stringify({
-            data: text,
-            key: encryptionKey,
-          }),
-        }
-      );
-      const res = await response.json();
+      const response = await axios.post(`${BACKEND_SERVER}/encryptData`, {
+        data: text,
+        key: encryptionKey,
+      });
       setIsEncrypted(true);
-      setEncryptedText(res.result);
+      setEncryptedText(response.data.encryptedData);
       toast.success("Encrypted Successfully !", {
         position: "top-right",
         autoClose: 3000,
@@ -166,6 +169,11 @@ const EditorX = () => {
     <div>
       <div className="viewPage">
         <div className="editorContainer">
+          <div className="headingContainer">
+            <h1 className="mainHeading" >
+              TextStore
+            </h1>
+          </div>
           <div className="top">
             <div>
               <input
@@ -176,10 +184,15 @@ const EditorX = () => {
               />
             </div>
             <Link to="/allFiles">
-              <button className="btn">All Files</button>
+              <button className="btn">
+                <div className="insideButton">
+                  <BsFiles className="icon" />
+                  All Files
+                </div>
+              </button>
             </Link>
           </div>
-
+        
           <CKEditor
             editor={ClassicEditor}
             data={text}
@@ -188,10 +201,15 @@ const EditorX = () => {
               setText(data);
             }}
           />
+  
+         
         </div>
         <div className="modalBtnContainer">
           <button className="btn" onClick={getURL}>
-            {isURL ? "Get Short URL" : "Save"}
+            <div className="insideButton">
+              <BiSave className="icon" />
+              {isURL ? "Get Short URL" : "Save"}
+            </div>
           </button>
           <button
             className="btn"
@@ -211,7 +229,10 @@ const EditorX = () => {
               }
             }}
           >
+          <div className="insideButton" >
+            <BsLockFill className="icon" />
             Encrypt
+          </div>
           </button>
         </div>
       </div>
